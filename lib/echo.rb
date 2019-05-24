@@ -12,6 +12,6 @@ class Echo
   end
 
   def answer
-  @answer = STDIN.gets
+    @answer = STDIN.gets
   end
 end
