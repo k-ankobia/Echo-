@@ -25,13 +25,22 @@ describe Echo do
     end
 
     describe '#engine' do 
-      it ' continues to prompt user for input until exit' do
+      it ' continues to prompt user for input ' do
         time = Time.new(2018, 01, 9, 16, 26, 2, '+00:00')
         allow(Time).to receive(:now).and_return(time)
         allow(STDIN).to receive(:gets).and_return('Hello, World')
 
         allow(echo).to receive(:loop).and_yield
         expect { echo.engine }.to output("Say something: 2018-01-09 | 16:26 | You said: 'Hello, World'!\n").to_stdout
+      end
+
+      it ' ends the app when user enters exit ' do
+        time = Time.new(2018, 01, 9, 16, 26, 2, '+00:00')
+        allow(Time).to receive(:now).and_return(time)
+        allow(STDIN).to receive(:gets).and_return('exit')
+
+
+        expect { echo.engine }.to output("Say something: Goodbye").to_stdout
       end
     end
   end
